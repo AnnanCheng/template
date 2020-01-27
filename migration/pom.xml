@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.annan</groupId>
+        <artifactId>template</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>migration</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>migration</name>
+    <description>Database migration</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>flyway</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>5.2.4</version>
+                        <executions>
+                            <execution>
+                                <id>template</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>migrate</goal>
+                                </goals>
+                                <configuration>
+                                    <url>jdbc:mysql://localhost:3306/template_db?useSSL=false</url>
+                                    <user>appUser</user>
+                                    <password>pwd</password>
+                                    <locations>
+                                        <location>
+                                            classpath:db/migration
+                                        </location>
+                                    </locations>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>8.0.15</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
