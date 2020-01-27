@@ -1,5 +1,15 @@
 version: '3.7'
 services:
+  mysql_migration:
+    image: template/migration:latest
+    build:
+      context: './migration'
+    restart: on-failure
+    environment:
+      - jdbc.url=jdbc:mysql://mysql:3306/
+      - jdbc.username=appUser
+      - jdbc.password=pwd
+
   backend:
     image: template/backend:latest
     restart: unless-stopped
@@ -7,3 +17,5 @@ services:
       context: './backend'
     ports:
       - 8888:8888
+    depends_on:
+      - mysql_migration
