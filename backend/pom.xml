@@ -6,7 +6,6 @@
         <groupId>com.annan</groupId>
         <artifactId>template</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -35,6 +34,7 @@
     </dependencies>
 
     <build>
+        <finalName>backend</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
