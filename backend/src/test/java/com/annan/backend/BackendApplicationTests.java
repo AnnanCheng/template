@@ -1,11 +1,12 @@
-package com.annan.template;
+package com.annan.backend;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-class TemplateApplicationTests {
+class BackendApplicationTests {
 
     @Test
     void contextLoads() {
