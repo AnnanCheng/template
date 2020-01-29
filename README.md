@@ -82,3 +82,4 @@ Response:
 
 - Since docker version 3 doesn't support condition of depends_on, migration and backend will start after mysql container is started, which means it wil not wait for mysql to be ready. That's why when you run prod mode, you will see some Spring boot throws exceptions during startup. But <b>don't worry</b>, docker will restart them until it's OK.
 - The flyway migration in this application is to import data to DB, so it doesn't support backup, restore etc. If you encounter some errors during migration. You have to throw the database away and start it from scratch again.
+- If docker complains like `no matching manifest for windows/amd64 in the manifest list entries`, please switch to Linux containers.
