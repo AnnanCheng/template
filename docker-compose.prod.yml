@@ -1,20 +1,41 @@
 version: '3.7'
 services:
+
+  mysql_db:
+    container_name: mysql_db
+    image: mysql:5.7.26
+    command: mysqld --verbose --sql-mode="NO_ENGINE_SUBSTITUTION" --character-set-server=utf8 --collation-server=utf8_general_ci
+    environment:
+      MYSQL_DATABASE: "template_db"
+      MYSQL_USER: "appUser"
+      MYSQL_PASSWORD: "pwd"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - 3306:3306
+
   mysql_migration:
     image: template/migration:latest
     build:
       context: './migration'
     restart: on-failure
     environment:
-      - jdbc.url=jdbc:mysql://mysql:3306/
-      - jdbc.username=appUser
-      - jdbc.password=pwd
+      - SPRING_DATASOURCE_USERNAME=appUser
+      - SPRING_DATASOURCE_PASSWORD=pwd
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/template_db?useSSL=false
+    depends_on:
+      mysql_db:
+        condition:
 
   backend:
     image: template/backend:latest
     restart: unless-stopped
     build:
       context: './backend'
+    environment:
+      - SPRING_DATASOURCE_USERNAME=appUser
+      - SPRING_DATASOURCE_PASSWORD=pwd
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/template_db?useSSL=false
     ports:
       - 8888:8888
     depends_on:

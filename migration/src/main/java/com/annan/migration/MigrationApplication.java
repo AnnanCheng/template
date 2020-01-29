@@ -9,13 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MigrationApplication implements CommandLineRunner {
 
-    @Value("${jdbc.url}")
+    @Value("${spring.datasource.url}")
     private String url;
 
-    @Value("${jdbc.username}")
+    @Value("${spring.datasource.username}")
     private String username;
 
-    @Value("${jdbc.password}")
+    @Value("${spring.datasource.password}")
     private String password;
 
     public static void main(String[] args) {
