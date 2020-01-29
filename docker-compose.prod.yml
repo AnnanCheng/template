@@ -24,8 +24,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=pwd
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_db:3306/template_db?useSSL=false
     depends_on:
-      mysql_db:
-        condition:
+      - mysql_db
 
   backend:
     image: template/backend:latest
